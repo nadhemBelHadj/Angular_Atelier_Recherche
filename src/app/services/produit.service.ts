@@ -8,7 +8,9 @@ import { Categorie } from '../model/categorie.model';
 })
 export class ProduitService {
   produits : Produit[]; //un tableau de Produit
+  produitsRecherche : Produit[]; //un tableau de Produit
   produit = new Produit();
+
   categorie = new Categorie();
 
   categories : Categorie[];
@@ -83,6 +85,18 @@ export class ProduitService {
     consulterCategorie(id:number): Categorie{    
       this.categorie =  this.categories.find(cat => cat.idCat  == id);
         return this.categorie;
+     }
+
+     rechercherParCategorie(idCat: number): Produit[]{
+      this.produitsRecherche = [];
+     
+      this.produits.forEach((cur, index) => {
+       if(idCat == cur.categorie.idCat) {
+           console.log("cur "+cur);
+          this.produitsRecherche.push(cur);
+           }
+     });
+     return this.produitsRecherche;
      }
    
 
